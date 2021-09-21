@@ -6,7 +6,7 @@
         content="A new conditional pixel synthesis model that uses abundant, low-cost, low-resolution imagery to generate accurate high-resolution imagery at locations and times in which it is unavailable.">
   <meta name="keywords" content="satellite imagery, remote sensing, generative networks, generative modeling, pixel synthesis, super resolution">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Spatial-Temporal Super-Resolution of Satellite Imagery via Conditional Pixel Synthesis</title>
+  <title>IS-Count: Large-scale Object Counting from Satellite Images with Covariate-based Importance Sampling</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -110,19 +110,16 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Spatial-Temporal Super-Resolution of Satellite Imagery via Conditional Pixel Synthesis</h1>
+          <h1 class="title is-1 publication-title">IS-Count: Large-scale Object Counting from Satellite Images with Covariate-based Importance Sampling</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="http://stanford.edu/~kellyyhe/">Yutong He</a>,</span>
+              <a href="https://cs.stanford.edu/~chenlin/">Chenlin Meng</a>,</span>
             <span class="author-block">
-              <a href="index.html">Dingjie Wang</a>,</span>
+              <a href="index.html">Enci Liu</a>,</span>
             <span class="author-block">
-              <a href="index.html">Nicholas Lai</a>,</span>
+              <a href="https://willieneis.github.io/">Willie Neiswanger</a>,</span>
             <span class="author-block">
-              <a href="https://stanford.edu/~wxyz/">William Zhang</a>,</span>
-            <span class="author-block">
-              <a href="https://cs.stanford.edu/~chenlin/">Chenlin Meng</a>,
-            </span>
+              <a href="https://tsong.me/">Jiaming Song</a>,</span>
             <span class="author-block">
               <a href="https://web.stanford.edu/~mburke/">Marshall Burke</a>,
             </span>
@@ -151,12 +148,12 @@
                 </a>
               </span> -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2106.11485"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv</span>
+                  <span>arXiv [In preparation]</span>
                 </a>
               </span>
               <!-- Video Link. -->
@@ -191,13 +188,13 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img id="teaser" src="./static/images/intro_figure.png" height="100%">
+      <img id="teaser" src="./static/images/visualization.png" height="100%">
       <!-- <video id="teaser" autoplay muted loop height="100%">
         <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/teaser.mp4"
                 type="video/mp4">
       </video> -->
       <h2 class="subtitle has-text-centered">
-        Given a 10m low resolution (LR) image from 2016 and a 1m high resolution (HR) image from 2018, we generate a photo-realistic and accurate HR image for 2016.
+        Visualization of distributions in Africa. The learned proposal distribution (Subfig. (c)) is very proportional to the ground truth building distribution, which we are trying to estimating. 
       </h2>
     </div>
   </div>
@@ -270,17 +267,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            High-resolution satellite imagery has proven useful for a broad range of tasks, including 
-            measurement of global human population, local economic livelihoods, and 
-            biodiversity, among many others. Unfortunately, high-resolution imagery is both 
-            infrequently collected and expensive to purchase, making it hard to efficiently and 
-            effectively scale these downstream tasks over both time and space. We propose a 
-            new conditional pixel synthesis model that uses abundant, low-cost, low-resolution 
-            imagery to generate accurate high-resolution imagery at locations and times in 
-            which it is unavailable.  We show that our model attains photo-realistic sample 
-            quality and outperforms competing baselines on a key downstream task – object 
-            counting – particularly in geographic locations where conditions on the ground are 
-            changing rapidly.
+            Object detection in high-resolution satellite imagery is emerging as a scalable alternative to on-the-ground survey data collection in many environmental and socioeconomic monitoring applications. However, performing object detection over large geographies can still be prohibitively expensive due to the high cost of purchasing imagery and compute. Inspired by traditional survey data collection strategies, we propose an approach to estimate object count statistics over large geographies through sampling. Given a cost budget, our method selects a small number of representative areas by sampling from a learnable proposal distribution. Using importance sampling, we are able to accurately estimate object counts after processing only a small fraction of the images compared to an exhaustive approach. We show empirically that the proposed framework achieves strong performance on estimating the number of buildings in the United States and Africa, cars in Kenya, brick kilns in Bangladesh, and swimming pools in the U.S., while requiring as few as 0.01% of satellite images compared to an exhaustive approach. 
           </p>
         </div>
       </div>
@@ -308,18 +295,37 @@
     <!-- Method. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Model</h2>
-          <img id="model" src="./static/images/model.png" height="100%">
+        <h2 class="title is-3">Method</h2>
+          <img id="model" src="./static/images/pipeline.png" style="width: 100%; text-align: center;">
           <h2 class="subtitle has-text-centered">
-            An illustration of our proposed framework (discriminator omitted). Details can be found in the paper.
+            An illustration of the IS-Count framework in comparison to the exhaustive approach to object counting.
           </h2>
-        <div class="content has-text-justified">
-          Our method uses two pairs of high resolution and low resolution 
-          satellite imagery from different timestamps. We then use a low resolution 
-          image and a high resolution image from a different time to generate a 
-          high resolution image of the area at the time the low resolution image was taken. 
-          We use a generative adversarial network (GAN) to train a generator and discriminator.
-        </div>
+          <!-- <div class="content has-text-justified">
+            Object counting frameworks comparison (example on the US.). Figure (a): An exhaustive approach downloads all image tiles covering the target region, maps the objects in each image using a trained model, and takes the summation of counts in all the images to produce a total count. However, purchasing satellite imagery for a <b>large</b> target region can be expensive. Figure (b): In contrast, IS-Count selects  <b>a small  number</b>  of  informative  areas  for  object  counting  by sampling from a learnable proposal distribution which captures the representative areas. IS-Count largely reduces the number  of  satellite  images  and human  annotations while achieving a high accuracy.
+          </div> -->
+          <div class="content has-text-justified">
+            An exhaustive approach (Subfig. (a)) downloads all image tiles covering the target region, maps the objects in each image using a trained model, and takes the summation of counts in all the images to produce a total count. However, purchasing satellite imagery for a <b>large</b> target region can be expensive. 
+          </div>
+          <div class="content has-text-justified">
+            In contrast, IS-Count saves a huge amount of cost by constructing a proposal distribution that is representative of the real object distribution. The major steps in IS-Count is described as follows: 
+            <ul>
+              <li>
+                First, we construct the base distribution from the covariate rasters (i.e. population, NL). Specifically, we take the pixel value normalized over all raster pixels within the target region as the probability to sample it.
+              </li>
+              <li>
+                Next, we learn the proposal distribution using either identity mapping from the base distribution or fine-tune the latter with isotonic regression. Then we select <b>a small number</b> of informative areas for object counting by sampling from the proposal distribution. 
+              </li>
+              <li>
+                Finally, the small number of samples are labeled by human annotators and the total object count is estimated using importance sampling.
+              </li>
+            </ul>
+            
+          </div>
+<!-- 
+          <img id="model" src="./static/images/covariates.png" style="width: 70%; text-align: center;">
+          <h2 class="subtitle has-text-centered">
+            A visualization of the covariates data.
+          </h2> -->
       </div>
     </div>
     <!--/ Method. -->
@@ -329,22 +335,34 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Results</h2>
-        <img id="model" src="./static/images/comparisons.png" height="100%">
+        <img id="model" src="./static/images/results.png" height="100%">
         <h2 class="subtitle has-text-centered">
-          Samples from all models on the Texas housing dataset.
-          Our models show advantages in both sample quality and structural detail consistency with the ground truth, especially in areas with house or pool construction (zoomed in with colored boxes).
+          Error rate of object count estimation using different methods (averaged over 20 runs).
         </h2>
         <div class="content has-text-justified">
-          Human evaluation showed improvements over other models in image realism, similarity to ground truth, and accuracy in building and pool counting.
+          Compared to exhaustive approaches, <b>IS-Count requires much fewer cost on purchasing high-resolution satellite images and fewer hours on labeling while still achieving high accuracies on estimating object counts</b>. 
         </div>
-        <img id="model" src="./static/images/time.png" height="100%">
+        <img id="model" src="./static/images/us_error.png" height="100%">
         <h2 class="subtitle has-text-centered">
-          Our method is able to generate images given a low resolution image timestamped either before or after the high resolution image.
+          Error rate of counting buildings in the US states.
         </h2>
-        <img id="model" src="./static/images/fmowcrop.png" height="100%">
+        <div class="content has-text-justified">
+          Building count experiment results show that <b>incorporating prior knowledge from covariate data via importance sampling boosts the estimation performance</b> compared to the uniform sampling baseline.
+        </div>
+        <img id="model" src="./static/images/html_correlation.png" height="100%">
+        <h2 class="subtitle has-text-centered">
+          Error rate vs. Proportion of area covered by samples.
+        </h2>
+        <div class="content has-text-justified">
+          We also found that <b>IS-Count with tuned proposal distribution converges faster to the ground truth object count as the sample size increases</b>. Specificially, the population (isotonic) proposal distribution converges fastest to the groundtruth building count, compared to the population (identity) method.
+        </div>
+        <!-- <div>
+           "Percentage sampled" denotes the ratio between the total  area covered by the used images and the area of the target region. For isotonic based methods, we use 20% of the total budget as the training size. We report the cost and time saved for  purchasing high-resolution images and labeling with human compared to an exhaustive approach on the target region. 
+        </div> -->
+        <!-- <img id="model" src="./static/images/fmowcrop.png" height="100%">
         <h2 class="subtitle has-text-centered">
           Samples from all models on the <a href="https://www.iarpa.gov/challenges/fmow.html">Functional Map of the World</a> crop field dataset.
-        </h2>
+        </h2> -->
       </div>
     </div>
     <!--/ Results. -->
@@ -356,14 +374,7 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{he2021spatialtemporal,
-      title={Spatial-Temporal Super-Resolution of Satellite Imagery via Conditional Pixel Synthesis}, 
-      author={Yutong He and Dingjie Wang and Nicholas Lai and William Zhang and Chenlin Meng and Marshall Burke and David B. Lobell and Stefano Ermon},
-      year={2021},
-      eprint={2106.11485},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}</code></pre>
+    <pre><code>TODO</code></pre>
   </div>
 </section>
 
@@ -374,8 +385,8 @@
       <div class="column is-full-width">
         <h2 class="title is-3">Related Work</h2>
           <div class="content has-text-justified">
-            Previous work has used high resolution satellite imagery for 
-            predicting economic development <a href="https://arxiv.org/abs/2002.01612">[Ayush et al., 2020]</a>. Low resolution satellite imagery has also been used for this task <a href="https://arxiv.org/abs/1711.03654">[Perez et al., 2017]</a>. Previous work in fusion models for satellite imagery include <a href="https://ieeexplore.ieee.org/document/1661809">[Gao et al., 2006]</a>, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0034425710001884">[Zhu et al., 2010]</a>, and <a href="https://arxiv.org/abs/2011.04762">[Bouabid et al., 2020]</a>. In contrast to previous work, which were focused on generating lower resolution satellite imagery, we are interested in generating very high resolution images, which are more useful for downstream tasks such as object detection for poverty level estimation.
+            There are prior works that use high-resolution satellite imagery for 
+            estimating poverty level <a href="https://arxiv.org/abs/2002.01612">[Ayush et al., 2020]</a>, <a href="https://arxiv.org/abs/2006.04224">[Ayush et al., 2021]</a>. Also, recent works have achieved great success in object mapping by collecting and labelling all satellite image tiles in a target region exhaustively<a href="https://www.nature.com/articles/nature14967.pdf">[Crowther et al., 2015]</a>, <a href="https://aiforsocialgood.github.io/2018/pdfs/track1/78_aisg_neurips2018.pdf">[Yu et al., 2018]</a>, <a href="https://developmentseed.org/blog/2021-02-18-ai-mapping-risks-to-wildlife-in-tanzania">[Yi et al., 2021b]</a>. Nevertheless, these exhaustive approaches require huge amount of high-resolution satellite imagery over a large region and long hours of human annotation, which are often unaffortable to researchers and inflexible to update statistics. In contrast, we are interested in developing a more cost- and time-efficient human-in-the-loop object counting pipeline by utilizing importance sampling.
           </div>
       </div>
     </div>
