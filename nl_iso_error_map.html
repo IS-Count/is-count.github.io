@@ -13,6 +13,23 @@
       padding: 0;
     }
 
+    h2,
+    h3 {
+      margin: 10px;
+      font-size: 18px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      margin: 10px;
+    }
+
+    /**
+    * Create a position for the map
+    * on the page */
     #map {
       position: absolute;
       top: 0;
@@ -20,163 +37,51 @@
       width: 100%;
     }
 
-      .map-overlay {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: rgba(255, 255, 255, 0.8);
-        margin-right: 5px;
-        font-family: Arial, sans-serif;
-        overflow: auto;
-        border-radius: 3px;
-      }
+    /**
+    * Set rules for how the map overlays
+    * (information box and legend) will be displayed
+    * on the page. */
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: #fff;
+      margin-right: 20px;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      border-radius: 3px;
+    }
 
-      .mo3 {
-        padding: 10px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        line-height: 18px;
-        height: 190px;
-        margin-bottom: 40px;
-        width: 70px;
-      }
+    #features {
+      top: 0;
+      height: 100px;
+      margin-top: 20px;
+      width: 250px;
+    }
 
-      #features {
-        top: 0;
-        height: 60px;
-        margin-top: 5px;
-        width: 250px;
-      }
+    #legend {
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 18px;
+      height: 125px;
+      margin-bottom: 40px;
+      width: 100px;
+    }
 
-      #legend {
-        padding: 10px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        line-height: 18px;
-        height: 190px;
-        margin-bottom: 40px;
-        width: 100px;
-      }
-
-      #legend2 {
-        padding: 10px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        line-height: 18px;
-        height: 190px;
-        margin-bottom: 40px;
-        width: 100px;
-      }
-
-      .legend-key {
-        display: inline-block;
-        border-radius: 20%;
-        width: 10px;
-        height: 10px;
-        margin-right: 5px;
-      }
-
-        #menu {
-            background: #fff;
-            position: absolute;
-            z-index: 1;
-            top: 80px;
-            left: 10px;
-            border-radius: 3px;
-            width: 120px;
-            border: 1px solid rgba(0,0,0,0.4);
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        #menu a {
-            font-size: 13px;
-            color: #404040;
-            display: block;
-            margin: 0;
-            padding: 0;
-            padding: 10px;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(0,0,0,0.25);
-            text-align: center;
-        }
-
-        #menu a:last-child {
-            border: none;
-        }
-
-        #menu a:hover {
-            background-color: #f8f8f8;
-            color: #404040;
-        }
-
-        #menu a.active {
-            background-color: #3887be;
-            color: #ffffff;
-        }
-
-        #menu a.active:hover {
-            background: #3074a4;
-        }
-        .map-overlay2 {
-            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-            position: absolute;
-            width: 200px;
-            top: 5px;
-            left: 5px;
-            padding: 0px;
-        }
-
-        .map-overlay2 .map-overlay-inner {
-            background-color: #fff;
-            box-shadow:0 1px 2px rgba(0, 0, 0, 0.10);
-            border-radius: 3px;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .map-overlay-inner fieldset {
-            border: none;
-            padding: 0;
-            margin: 0 0 10px;
-        }
-
-        .map-overlay-inner fieldset:last-child {
-            margin: 0;
-        }
-
-        .map-overlay-inner select {
-            width: 100%;
-        }
-
-        .map-overlay-inner label {
-            display: block;
-            font-weight: bold;
-            margin: 0 0 5px;
-        }
-
-        .map-overlay-inner button {
-            display: inline-block;
-            width: 36px;
-            height: 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .map-overlay-inner button:focus {
-            outline: none;
-        }
-
-        .map-overlay-inner button:hover {
-            box-shadow:inset 0 0 0 3px rgba(0, 0, 0, 0.10);
-        }
-
+    .legend-key {
+      display: inline-block;
+      border-radius: 20%;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+    }
   </style>
 </head>
 <body>
 
   <div id='map'></div>
-
-  <div class='map-overlay' id='features'>
-  	<div><strong>Error:</strong> <span id='error'></span></div>
-		<div><strong>Error:</strong> <span id='error'></span></div>
-  </div>
+  <div class='map-overlay' id='features'><h2>Estimation Error</h2><div id='pd'><p>Hover over a state!</p></div></div>
+  <div class='map-overlay' id='legend'></div>
 
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiamVzc2xlYyIsImEiOiJja3hld2ViZHUyZHZuMnVxaHIyOXFjcDRnIn0.ozxlH3AIbGpqhBODqdK5hg';
@@ -187,31 +92,63 @@
       zoom: 3 // Specify the starting zoom
     });
 
-	  var zoomThreshold = 5;
-	  var zoomThreshold2 = 10;
+    var zoomThreshold = 5;
+    var zoomThreshold2 = 10;
 
-	  var layer = document.getElementById("layer");
+    var layer = document.getElementById("layer");
 
     map.on('load', function() {
       // the rest of the code will go in here
-        // uniform
-        var layers = ['0', '0.5', '1', '2', '4', '8', '16', '32', '50'];
-        var colors = ['#f6fafe', '#dfe9f6', '#c9daed', '#a5c9df', '#79afd2', '#5792c1', '#376fae', '#205297', '#133167'];
-        for (i = 0; i < layers.length; i++) {
-          var layer = layers[i];
-          var color = colors[i];
-          var item = document.createElement('div');
-          var key = document.createElement('span');
-          key.className = 'legend-key';
-          key.style.backgroundColor = color;
+      // make a pointer cursor
+      map.getCanvas().style.cursor = 'default';
 
-          var value = document.createElement('span');
-          value.innerHTML = layer;
-          item.appendChild(key);
-          item.appendChild(value);
-          legend_state_solar.appendChild(item);
-        }
+      const layers = [
+        '0.0-0.05',
+        '0.05-0.1',
+        '0.1-0.2',
+        '0.2-0.3',
+        '0.3-0.4',
+        '0.4-0.5',
+        '>0.5'
+      ];
+      const colors = [
+        '#FFEDA0',
+        '#FED976',
+        '#FEB24C',
+        '#FD8D3C',
+        '#FC4E2A',
+        '#E31A1C',
+        '#BD0026'
+      ];
+
+      // create legend
+      const legend = document.getElementById('legend');
+
+      layers.forEach((layer, i) => {
+        const color = colors[i];
+        const item = document.createElement('div');
+        const key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = color;
+
+        const value = document.createElement('span');
+        value.innerHTML = `${layer}`;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
       });
+
+
+      map.on('mousemove', (event) => {
+        const states = map.queryRenderedFeatures(event.point, {
+          layers: ['error']
+        });
+        document.getElementById('pd').innerHTML = states.length
+          ? `<h3>${states[0].properties.name}</h3><p><strong><em>${states[0].properties.error.toFixed(4)}</strong></em></p>`
+          : `<p>Hover over a state!</p>`;
+      });
+
+    });
     </script>
 </body>
 </html> 
