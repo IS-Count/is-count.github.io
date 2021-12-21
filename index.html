@@ -376,10 +376,10 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Results</h2>
-        <!-- <img id="model" src="./static/images/results.png" height="100%">
-        <h2 class="subtitle has-text-centered">
-          Error rate of object count estimation using different methods (averaged over 20 runs).
-        </h2> -->
+        <div class="content has-text-justified">
+          We can use IS-Count to estimate the total object count in different regions with as few as 0.001% of the data while achieving estimation error as low as 1.0%. Specifically, the estimation error is computed as <b>the absolute difference between the estimated and the ground truth counts divided by the ground truth</b>. 
+          We show the estimation error map of building counts in the US states and African countries below.
+        </div>
 
         <p align="center">
           <!-- <div class="loadiframe">
@@ -399,6 +399,10 @@
             <button id="pop_id" data-src="pop_id_error_map.html">Population (identity)</button>
             <button id="pop_iso" data-src="pop_iso_error_map.html">Population (isotonic)</button>
           </div>
+          <h2 class="subtitle has-text-centered">
+            Click on the options above to see results for different methods. <br>
+            Drag the map to see results for the US and Africa.
+          </h2>
           <div>
             <iframe src="uniform_error_map.html" id='frame' frameborder="0" width=100% height=500></iframe>
             <h2 class="subtitle has-text-centered">
@@ -476,7 +480,7 @@
           Error rate vs. Proportion of area covered by samples.
         </h2> -->
         <div class="content has-text-justified">
-          We also found that <b>IS-Count with tuned proposal distribution converges faster to the ground truth object count as the sample size increases</b>. Specificially, the population (isotonic) proposal distribution converges fastest to the groundtruth building count, compared to the population (identity) method.
+          We also found that <b>IS-Count with tuned proposal distribution converges faster to the ground truth object count as the sample size increases</b>. That is, the population (isotonic) proposal distribution converges fastest to the groundtruth building count, compared to the population (identity) method.
         </div>
         <!-- <div>
            "Percentage sampled" denotes the ratio between the total  area covered by the used images and the area of the target region. For isotonic based methods, we use 20% of the total budget as the training size. We report the cost and time saved for  purchasing high-resolution images and labeling with human compared to an exhaustive approach on the target region. 
