@@ -63,6 +63,17 @@
     padding: 8px;
 
   }
+
+  .btn-group button {
+    /*background-color: #000000; /* Green background */
+    border: 1px solid gray;
+    color: black; /* text color */
+    padding: 10px 40px;
+    cursor: pointer; /* Pointer/hand icon */
+    float: center; /* Float the buttons side by side */
+    margin: 0px 0px;
+    font-size: 16px;
+  }
   </style>
 </head>
 <body>
@@ -113,26 +124,26 @@
           <h1 class="title is-1 publication-title">IS-Count: Large-scale Object Counting from Satellite Images with Covariate-based Importance Sampling</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://cs.stanford.edu/~chenlin/">Chenlin Meng</a>,</span>
+              <a href="https://cs.stanford.edu/~chenlin/">Chenlin Meng*</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="index.html">Enci Liu</a>,</span>
+              <a href="https://jesscel.github.io/">Enci Liu*</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://willieneis.github.io/">Willie Neiswanger</a>,</span>
+              <a href="https://willieneis.github.io/">Willie Neiswanger</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://tsong.me/">Jiaming Song</a>,</span>
+              <a href="https://tsong.me/">Jiaming Song</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://web.stanford.edu/~mburke/">Marshall Burke</a>,
+              <a href="https://web.stanford.edu/~mburke/">Marshall Burke</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://earth.stanford.edu/people/david-lobell">David B. Lobell</a>,
+              <a href="https://earth.stanford.edu/people/david-lobell">David B. Lobell</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="http://cs.stanford.edu/~ermon/">Stefano Ermon</a>
+              <a href="http://cs.stanford.edu/~ermon/">Stefano Ermon</a><sup>1</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Stanford University</span>
+            <span class="author-block"><sup>1</sup>Stanford University</span>
           </div>
 
           <div class="column has-text-centered">
@@ -148,12 +159,12 @@
                 </a>
               </span> -->
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2112.09126"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv [In preparation]</span>
+                  <span>Paper</span>
                 </a>
               </span>
               <!-- Video Link. -->
@@ -168,12 +179,12 @@
               </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://github.com/sustainlab-group/IS-COUNT_private"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code [In preparation]</span>
+                  <span>Code</span>
                 </a>
               </span>
             </div>
@@ -288,7 +299,6 @@
   </div>
 </section>
 
-
 <section class="section">
   <div class="container is-max-desktop">
 
@@ -335,24 +345,101 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Results</h2>
-        <img id="model" src="./static/images/results.png" height="100%">
+        <!-- <img id="model" src="./static/images/results.png" height="100%">
         <h2 class="subtitle has-text-centered">
           Error rate of object count estimation using different methods (averaged over 20 runs).
-        </h2>
+        </h2> -->
+
+        <p align="center">
+          <!-- <div class="loadiframe">
+              <ul>
+                <li><a>Uniform</a></li>
+                <li><a>NL (identity)</a></li>
+                <li><a>NL (isotonic)</a></li>
+                <li><a>Population (identity)</a></li>
+                <li><a>Population (isotonic)</a></li>
+              </ul>
+          </div> -->
+
+          <div class="tabs is-toggle is-fullwidth btn-group loadiframe">
+            <button id="uniform" data-src="uniform_error_map.html">Uniform</button>
+            <button id="nl_id" data-src="nl_id_error_map.html">NL (identity)</button>
+            <button id="nl_iso" data-src="nl_iso_error_map.html">NL (isotonic)</button>
+            <button id="pop_id" data-src="pop_id_error_map.html">Population (identity)</button>
+            <button id="pop_iso" data-src="pop_iso_error_map.html">Population (isotonic)</button>
+          </div>
+          <div>
+            <iframe src="file:///Users/liuenci/Desktop/test_map.html" id='frame' frameborder="0" width=100% height=500></iframe>
+          </div>
+
+          <!-- <select id="selector">
+            <option value="file:///Users/liuenci/Desktop/test_map.html">Uniform</option>
+            <option value="https://d2c-model.github.io/">NL (identity)</option>
+            <option value="http://www.techcrunch.com/">NL (isotonic)</option>
+            <option value="http://www.microsoft.com/">Population (identity)</option>
+            <option value="http://www.microsoft.com/">Population (isotonic)</option>
+          </select>
+          <div>
+            <iframe src="file:///Users/liuenci/Desktop/test_map.html" frameborder="0" id="iframeId" width=100% height=500></iframe>
+          </div> -->
+
+          <script type="text/javascript">
+            // $(document).ready(function(){
+            //     $("#selector").change(function(){
+            //         $("#iframeId").attr("src", $(this).val());
+            //     });
+            // });
+
+            function iframeChange() {
+                var buttons = document.querySelector(".loadiframe"),
+                    iframe = document.getElementById('frame');
+
+                buttons.addEventListener("click", function (e) {
+                    iframe.src = e.target.dataset.src;
+                });
+            }
+            window.onload = iframeChange;
+          </script>
+
+          <!-- <div id="uniform">
+            <iframe src="file:///Users/liuenci/Desktop/test_map.html" title="Estimation error map" width=100% height=500>
+            </iframe>
+          </div>
+
+          <div id="nl_id">
+            <iframe src="https://d2c-model.github.io/" title="Estimation error map" width=100% height=500>
+            </iframe>
+          </div>
+
+          <div id="nl_iso">
+            <iframe src="file:///Users/liuenci/Desktop/test_map.html" title="Estimation error map" width=100% height=500>
+            </iframe>
+          </div>
+
+          <div id="pop_id">
+            <iframe src="file:///Users/liuenci/Desktop/test_map.html" title="Estimation error map" width=100% height=500>
+            </iframe>
+          </div>
+
+          <div id="pop_iso">
+            <iframe src="file:///Users/liuenci/Desktop/test_map.html" title="Estimation error map" width=100% height=500>
+            </iframe>
+          </div> -->
+        </p>
         <div class="content has-text-justified">
           Compared to exhaustive approaches, <b>IS-Count requires much fewer cost (e.g. 0.01%) on purchasing high-resolution satellite images and fewer hours on labeling while still achieving high accuracies on estimating object counts</b>. 
         </div>
-        <img id="model" src="./static/images/us_error.png" height="100%">
+        <!-- <img id="model" src="./static/images/us_error.png" height="100%">
         <h2 class="subtitle has-text-centered">
           Error rate of counting buildings in the US states.
-        </h2>
+        </h2> -->
         <div class="content has-text-justified">
           Building count experiment results show that <b>incorporating prior knowledge from covariate data via importance sampling boosts the estimation performance</b> compared to the uniform sampling baseline.
         </div>
-        <img id="model" src="./static/images/html_correlation.png" height="100%">
+        <!-- <img id="model" src="./static/images/html_correlation.png" height="100%">
         <h2 class="subtitle has-text-centered">
           Error rate vs. Proportion of area covered by samples.
-        </h2>
+        </h2> -->
         <div class="content has-text-justified">
           We also found that <b>IS-Count with tuned proposal distribution converges faster to the ground truth object count as the sample size increases</b>. Specificially, the population (isotonic) proposal distribution converges fastest to the groundtruth building count, compared to the population (identity) method.
         </div>
