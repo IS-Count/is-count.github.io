@@ -377,7 +377,7 @@
       <div class="column is-full-width">
         <h2 class="title is-3">Estimating Building Counts</h2>
         <div class="content has-text-justified">
-          We can use IS-Count to estimate the total object count in different regions with as few as 0.001% of the data while achieving estimation error as low as 1.0%. Specifically, the estimation error is computed as <b>the absolute difference between the estimated and the ground truth counts divided by the ground truth</b>. 
+          We can use IS-Count to estimate the total object count in different regions with as few as 0.001% of the data while achieving estimation error as low as 1.0%. Specifically, the estimation error is computed as <b>the absolute difference between the estimated and the ground truth counts (given by the Microsoft Building Footprints in the US and Google Open Buildings in Africa) divided by the ground truth</b>. 
           We show the estimation error map of building counts in the US states and African countries below.
         </div>
 
@@ -401,7 +401,7 @@
           </div>
           <h2 class="subtitle has-text-centered">
             Click on the options above to see results for different methods. <br>
-            Drag the map to see results for the US and Africa.
+            Drag the map and zoom in to see results for the US states and African countries.
           </h2>
           <div>
             <iframe src="uniform_error_map.html" id='frame' frameborder="0" width=100% height=500></iframe>
